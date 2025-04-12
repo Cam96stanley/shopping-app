@@ -1,0 +1,12 @@
+.title {
+  margin-bottom: 4rem;
+}
+
+.btn {
+  margin-top: 1rem;
+}
+
+.carousel {
+  height: 250px;
+  object-fit: contain;
+}

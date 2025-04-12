@@ -1,0 +1,56 @@
+.card__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.product__img {
+  height: 250px;
+  object-fit: contain;
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px 12px 0 0;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product__price {
+  font-weight: bold;
+  color: #222;
+  margin-top: 10px;
+  margin-bottom: 16px;
+}
+
+.btn__container {
+  margin-top: auto;
+  text-align: left;
+}
+
+.card .btn {
+  background-color: #343a40;
+  border: none;
+}
+
+.card .btn:hover {
+  background-color: #212529;
+}
