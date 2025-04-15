@@ -6,12 +6,15 @@ import axios from "axios";
 import ProductListingPage from "./pages/ProductListingPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import AddProductPage from "./pages/AddProductPage";
+import Cart from "./pages/Cart";
 import { ToastContainer, toast } from "react-toastify";
+
 function App() {
   const [products, setProducts] = useState([]);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [cart, setCart] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     price: "",
@@ -80,6 +83,48 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
+
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+    toast.success(`${product.title} added to cart!`);
+  };
+
+  const increaseQuantity = (productId) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (productId) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+    toast.info("Item removed from cart");
+  };
+
   return (
     <>
       <Routes>
@@ -92,6 +137,7 @@ function App() {
                 products={products}
                 loading={loading}
                 error={error}
+                addToCart={addToCart}
               />
             }
           />
@@ -103,6 +149,7 @@ function App() {
                 setFormData={setFormData}
                 handleFormChange={handleFormChange}
                 handleFormSubmit={handleFormSubmit}
+                addToCart={addToCart}
               />
             }
           />
@@ -113,6 +160,18 @@ function App() {
                 handleFormChange={handleFormChange}
                 handleFormSubmit={handleFormSubmit}
                 formData={formData}
+              />
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cart={cart}
+                setCart={setCart}
+                increaseQuantity={increaseQuantity}
+                decreaseQuantity={decreaseQuantity}
+                removeFromCart={removeFromCart}
               />
             }
           />

@@ -42,8 +42,10 @@
 }
 
 .btn__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: auto;
-  text-align: left;
 }
 
 .card .btn {

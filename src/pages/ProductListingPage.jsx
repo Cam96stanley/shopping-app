@@ -4,7 +4,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
 import "../styles/productListingPage.css";
 
-const ProductListingPage = ({ products, loading, error }) => {
+const ProductListingPage = ({ products, loading, error, addToCart }) => {
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center mt-5 gap-2">
@@ -33,6 +33,16 @@ const ProductListingPage = ({ products, loading, error }) => {
                 <Button as={Link} to={`/products/${product.id}`}>
                   Details
                 </Button>
+                <i
+                  className="bi bi-cart-plus"
+                  style={{
+                    cursor: "pointer",
+                    fontSize: "1.6rem",
+                    marginTop: "1rem",
+                    color: "green",
+                  }}
+                  onClick={() => addToCart(product)}
+                ></i>
               </div>
             </Card.Body>
           </Card>

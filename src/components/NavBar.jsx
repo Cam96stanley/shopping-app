@@ -19,6 +19,9 @@ const NavBar = () => {
             <Nav.Link as={NavLink} to="/add-products" activeclassname="active">
               Add Products
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/cart" activeclassname="active">
+              Cart
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

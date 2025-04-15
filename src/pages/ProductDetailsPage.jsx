@@ -11,6 +11,7 @@ const ProductDetailsPage = ({
   setFormData,
   handleFormChange,
   handleFormSubmit,
+  addToCart,
 }) => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
@@ -92,6 +93,11 @@ const ProductDetailsPage = ({
         <div className="d-flex justify-content-between align-items-center mt-3">
           <p className="product__price mb-0">${product.price}</p>
           <div className="d-flex gap-3">
+            <i
+              className="bi bi-cart-plus"
+              style={{ cursor: "pointer", fontSize: "1.6rem", color: "green" }}
+              onClick={() => addToCart(product)}
+            ></i>
             <i
               className="bi bi-pen"
               style={{ cursor: "pointer", fontSize: "1.6rem", color: "green" }}
